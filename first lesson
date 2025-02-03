@@ -1,0 +1,39 @@
+from tkinter import *
+
+root = Tk()
+root.title("login")
+root.geometry("400x300")
+root.config(background="lightblue")
+
+username = Label(root,
+                 text = "Username",
+                 bg = "blue",
+                 fg = "white",
+                 font = ("Ariel", 8, "bold"),
+                 )
+username.place(x = 40, y = 60)
+
+password = Label(root,
+                 text = "Password",
+                 )
+password.place(x = 40, y = 90)
+
+user_name = Entry(root,
+                   width=30,
+                   highlightthickness = 2,
+                   highlightcolor = "yellow")
+user_name.place(x = 110,y = 60)
+
+password_entry = Entry(root,
+                        width = 30,
+                        highlightthickness = 2,
+                        highlightcolor = "yellow")
+password_entry.place(x = 110, y = 90)
+
+submit = Button(root,
+                 text = "submit",
+                 activebackground = "grey",
+                 activeforeground = "white")
+submit.place(x = 40, y = 120)
+
+root.mainloop()
