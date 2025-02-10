@@ -1,0 +1,36 @@
+from tkinter import *
+import calendar
+def cal():
+    calendar1 = Tk()
+    calendar1.config(background = "grey")
+    calendar1.geometry('800x800')
+    calendar1.title("calendar")
+
+    fetch_year = int(year_entry.get())
+
+    content = calendar.calendar(fetch_year)
+    show = Label(calendar1, text=content)
+    show.grid(row=4,column=2)
+
+    calendar1.mainloop()
+
+if __name__ == "__main__":
+    homepage = Tk()
+    homepage.config(background = "grey")
+    homepage.geometry('800x800')
+
+    l1 = Label(homepage, text = "calender", fg = "white", bg = "green", font = ('ariel', 20, 'bold'))
+    l2 = Label(homepage, text = "entry year", fg="white",bg="black")
+    year_entry = Entry(homepage, text="enter year",fg="grey",bg="blue")
+    show_calendar = Button(homepage, text="show", command=cal)
+    exit = Button(homepage, text="exit",command=exit)
+
+    l1.grid(row=1,column=3)
+    l2.grid(row=2,column=3)
+    year_entry.grid(row=3,column=3)
+    show_calendar.grid(row=4, column=3)
+    exit.grid(row=5, column=3)
+
+    homepage.mainloop()
+
+
