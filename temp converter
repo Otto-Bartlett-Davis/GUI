@@ -1,0 +1,28 @@
+from tkinter import *
+
+root = Tk()
+root.title("Temperature Converter")
+
+def convert():
+    t_celsius = celsius_entry.get()
+    if (t_celsius.replace('.',"",1).isdigit()):
+        #method used to hide widget place by grid function
+        error_label.grid_forget()
+        t_fahrenheit = (t_celsius*1.8) + 32
+        answer.config(text=t_fahrenheit)
+    else:
+        error_label.grid(row=5, column=1)
+        
+cf = Label(root, text="celsius to fahrenheit")
+cf.grid(row=1, column=3)
+enter_in_c = Label(root, text="enter in celsius")
+enter_in_c.grid(row=2, column = 1)
+convert_button= Button(root, text="Convert", command=convert)
+convert_button.grid(row=2, column=5)
+answer = Label(root)
+answer.grid(row=3, column=3)
+celsius_entry= Entry(root)
+celsius_entry.grid(row=4,column=3)
+error_label = Label(root, text="error - invalid input")
+
+root.mainloop()
