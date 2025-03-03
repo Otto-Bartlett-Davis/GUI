@@ -1,0 +1,80 @@
+from tkinter import *
+import random
+
+P_score = 0
+C_score = 0
+
+options = [("rock",0),("paper",1),("scissors",2)]
+
+def computer_win():
+    global C_score, P_score
+    C_score += 1
+    label1.config(text="computer won")
+    cs_label.config(text="computer score: " + str(C_score))
+    ps_label.config(text= "Player score: " + str(P_score))
+
+def player_wins():
+    global P_score, C_score
+    P_score += 1
+    label1.config(text="player won")
+    ps_label.config(text="Player score: " + str(P_score))
+    cs_label.config(text="Computer score: " + str(C_score))
+
+def tie():
+    global C_score, P_score
+    label1.config(text="Tie")
+    ps_label.config(text="Player score: " + str(P_score))
+    cs_label.config(text="Computer score: " + str(C_score))
+
+def c_choices():
+    return random.choice(options)
+
+def player_choice(player_input):
+    global C_score, P_score
+    c_input = c_choices()
+    print(player_input)
+    print(c_input)
+    pc_label.config(text="you selected: " + player_input[0])
+    cc_label.config(text="the computer selected: " + c_input[0])
+    if player_input == c_input:
+        tie()
+    if (player_input[1] - c_input[1]) % 3 == 1:
+        player_wins()
+    else:
+        computer_win()
+
+root = Tk()
+root.geometry("400x150")
+root.title("rock paper scissors")
+
+ps_label = Label(root, text="player score: ")
+ps_label.grid(row=2, column=1)
+
+cs_label = Label(root, text="computer score: ")
+cs_label.grid(row=2, column=5)
+
+rps_game = Label(root, text="rock paper scissors game")
+rps_game.grid(row=1,column=3)
+
+label1 = Label(root)
+label1.grid(row=2, column=3)
+
+pc_label = Label(root, text="player choice")
+pc_label.grid(row=3, column=3)
+
+rock_button= Button(root, text="rock", command=lambda: player_choice(options[0]))
+paper_button = Button(root, text="paper", command=lambda: player_choice(options[1]))
+scissors_button = Button(root, text="scissors", command=lambda: player_choice(options[2]))
+
+rock_button.grid(row=5, column=1)
+paper_button.grid(row=5, column=3)
+scissors_button.grid(row=5, column=5)
+
+cc_label = Label(root, text="computer choice")
+cc_label.grid(row=4, column = 3)
+
+root.mainloop()
+
+
+
+
