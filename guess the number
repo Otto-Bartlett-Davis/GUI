@@ -1,1 +1,40 @@
+import random
+from tkinter import messagebox
+from tkinter import *
+
+root = Tk()
+root.title("Guess the number")
+root.geometry("400x400")
+rand_number = random.randint(1, 20)
+
+def start():
+    name = text_name.get()
+    messagebox.showinfo("Name", "hey " + name + " can you guess a number between 1 and 20")
+
+def num_check():
+    guess = int(text_guess.get())
+    if guess > rand_number:
+        messagebox.showinfo("High", "Your guess is too high")
+    elif guess < rand_number:
+        messagebox.showinfo("Low", "Your guess is too low")
+    else:
+        messagebox.showinfo("Good", "Good Job!")
+
+Title = Label(root, text="Guess the number game")
+Title.grid(row=1, column=1)
+text_name = Entry(root)
+name_text = Label(root, text = "please enter your name")
+name_text.grid(row=2, column = 6)
+text_name.grid(row=2, column=1)
+guess_text = Label(root, text = "please enter a number")
+guess_text.grid(row=4, column = 6)
+text_guess = Entry(root)
+text_guess.grid(row=4, column = 1)
+confirm = Button(root, text="Guess!", command=num_check)
+enter_name = Button(root, text = "Ok", command = start)
+enter_name.grid(row=2, column = 4)
+confirm.grid(row = 4, column = 4)
+
+root.mainloop()
+
 
