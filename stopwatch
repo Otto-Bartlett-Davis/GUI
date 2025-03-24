@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 import time
 
 root = Tk()
@@ -21,7 +22,7 @@ seconds.grid(row=2, column=5)
 
 def counter():
     try:
-        t = int((h.get())*3600) + int((m.get())*60) + int(s.get())
+        t = int(h.get())*3600 + int(m.get())*60 + int(s.get())
     except:
         print("enter a valid input!")
     while t > -1:
@@ -30,10 +31,20 @@ def counter():
         if min > 60:
             hour, min = divmod(min, 60)
 
-    h.set("{00:2d}".format(hour))
-    m.set("{00:2d}".format(min))
-    s.set("{00:2d}".format(sec))
+        h.set("{00:2d}".format(hour))
+        m.set("{00:2d}".format(min))
+        s.set("{00:2d}".format(sec))
 
+        root.update()
+        time.sleep(1)
+
+        if t == 0:
+            messagebox.showinfo("time countdown", "Time Up")
+
+        t-=1
+
+start = Button(text="start", command=counter)
+start.grid(row=3, column=1)
 
 
 root.mainloop()
