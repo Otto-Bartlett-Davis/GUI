@@ -3,6 +3,7 @@ from tkinter.filedialog import *
 
 root = Tk()
 root.title("memorizer")
+root.geometry('400x400')
 
 def open():
     contents = askopenfile(title="open file")
@@ -29,7 +30,17 @@ def delete():
     if selection:
         file_list.delete(selection)
 
-
-
+open_button = Button(root, text="open", command = open)
+open_button.place(x=50, y=1, width=300)
+save_button = Button(root, text="save", command = save)
+save_button.place(x=50, y=50, width=300)
+add_button = Button(root, text="add", command = add)
+add_button.place(x=1, y=300, width=50)
+delete_button = Button(root, text="delete", command = delete)
+delete_button.place(x=350, y=300, width=50)
+file_entry = Entry(root)
+file_entry.place(x=50, y=28.5, width=300)
+file_list = Listbox(root)
+file_list.place(x=52, y=80, width=294)
 
 root.mainloop()
