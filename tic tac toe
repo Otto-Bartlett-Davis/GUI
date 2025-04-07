@@ -1,0 +1,48 @@
+from tkinter import *
+from tkinter import Button
+from functools import partial
+
+sign = 0
+global board
+board = [[" " for x in range(3)] for y in range(3)]
+#define func that's going to write text on the buttons while playing with the computer
+def gettext_pc(i, j, gb, l1, l2):
+    global sign
+    if board[i][j] == " ":
+        if sign%2 == 0:
+            l1.config(state=DISABLED)
+            l2.config(state=ACTIVE)
+            board[i][j] = "x"
+        else:
+            l1.config(state=ACTIVE)
+            l2.config(state=DISABLED)
+            board[i][j] = "o"
+        sign += 1
+        button[i][j].config(text=board[i][j])
+def gamemode(game, l1, l2):
+    global button
+    button = []
+    for i in range(3):
+        m = i + 3
+        button.append(i)
+        button[i] = []
+        row = []
+        for j in range(3):
+            n = j
+            button[i].append(j)
+            get_text = partial(gettext_pc, i, j, game_mode, l1, l2)
+            button[i][j] = Button(game_mode, command=get_text, height=5, width=5)
+            button[i][j].grid(row=m, column=n)
+            
+
+root = Tk()
+title = Label(root, text="tic tac toe")
+title.grid(row=1, column=3)
+singleplayer = Button(root, text="Singleplayer",)
+singleplayer.grid(row=2, column=1)
+multiplayer = Button(root, text="Multiplayer")
+multiplayer.grid(row=3, column=1)
+exit = Button(root, text="exit")
+exit.grid(row=4, column =3)
+
+
