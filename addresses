@@ -1,0 +1,52 @@
+from tkinter import *
+from tkinter.filedialog import *
+from tkinter import messagebox
+
+root = Tk()
+root.title("Address Book")
+root.geometry('800x800')
+
+open_button = Button(root, text="open")
+open_button.grid(row = 1, column= 3)
+address_list = Listbox(root, width=50)
+address_list.grid(row=2,column=1, rowspan=4, columnspan=2)
+name = Entry(root, text = "email")
+name.grid(row=2,column=8)
+name_label = Label(root, text="name: ")
+name_label.grid(row=2, column=6)
+address = Entry(root, text="address")
+address.grid(row=3, column=8)
+address_label = Label(root, text="address: ")
+address_label.grid(row=3, column=6)
+mobile = Entry(root, text="mobile")
+mobile.grid(row=4, column=8)
+mobile_label = Label(root, text="mobile: ")
+mobile_label.grid(row=4, column=6)
+email = Entry(root, text="email")
+email.grid(row=5, column=8)
+email_label = Label(root, text="email: ")
+email_label.grid(row=5, column=6)
+birthday = Entry(root, text="birthday")
+birthday.grid(row=6, column=8)
+birthday_label = Label(root, text="birthday: ")
+birthday_label.grid(row=6, column=6)
+edit = Button(root, text="edit", width=10)
+edit.grid(row=7, column=1)
+delete = Button(root, text="delete", width=10)
+delete.grid(row=7, column=2)
+update = Button(root, text="update/add", width=10)
+update.grid(row=7, column=7)
+save = Button(root, text="save", width=50)
+save.grid(row=8, column=2)
+
+addresses = {}
+
+def add():
+    key=name.get()
+    if key == "":
+        messagebox.showinfo("error", "Name cannot be empty")
+    else:
+        if key not in addresses.keys():
+            address_list.insert(END, key)
+            
+root.mainloop()
