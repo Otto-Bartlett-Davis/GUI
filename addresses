@@ -37,7 +37,7 @@ def edit():
         address.insert(0, details[0])
         mobile.insert(0, details[1])
         email.insert(0, details[2])
-        birthday.insert(0, details[2])
+        birthday.insert(0, details[3])
     else:
         messagebox.showinfo("error", "please select a name")
 
@@ -50,26 +50,19 @@ def delete():
     else:
         messagebox.showinfo("error", "please select a name")
 
-def save():
-    output = asksaveasfile(defaultextension=".txt")
-    if output is not None:
-        for i in address_list.get(0, END):
-            print(i.strip(), file=output)
-        clear1()
-
 def reset():
     clear1()
     address_list.delete(0, END)
     addresses.clear()
 
-"""def open():
-    global addresses
-    reset()
-    contents = askopenfile(title="open file")
-    if contents is not None:
-        items = contents.readlines()
-        for i in items:
-            addresses.insert(END, i.strip())"""
+def save():
+    output = asksaveasfile(defaultextension=".txt", mode='w')
+    if output:
+        output.write(repr(addresses))
+        output.close()
+        reset()
+    else:
+        messagebox.showinfo("error", "File not found")
 
 def open():
     global addresses
@@ -82,10 +75,28 @@ def open():
     else:
         messagebox.showinfo("error", "please select a name")
 
+def display(event):
+    display_window = Toplevel(root)
+    index = address_list.curselection()
+    info = ""
+    if index:
+        selected_index = index[0]
+        key = address_list.get(selected_index)
+        info = "name: " + str(key) + "\n"
+        details = addresses.get(key)
+        info += "address: " + details[0] + "\n" 
+        info += "number: " + details[1] + "\n"
+        info += "email: " + details[2] + "\n"
+        info += "birthday" + details[3]
+    information = Label(display_window)
+    information.grid(row=0, column=0)
+    information.configure(text=info)
+        
 open_button = Button(root, text="open", command=open)
 open_button.grid(row = 1, column= 3)
 address_list = Listbox(root, width=50)
 address_list.grid(row=2,column=1, rowspan=4, columnspan=2)
+address_list.bind('<<ListboxSelect>>',display)
 name = Entry(root, text = "name")
 name.grid(row=2,column=8)
 name_label = Label(root, text="name: ")
